@@ -82,12 +82,12 @@
       align-items: center;
       gap: 10px;
     }
-    .nav-logo-dot {
-      width: 24px;
-      height: 24px;
-      background: var(--pink);
-      border: 3px solid var(--brown-dark);
-      display: inline-block;
+    .nav-logo-gif {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--brown-dark);
+  image-rendering: pixelated;
+  object-fit: cover;
     }
 
     /* Hamburger button (mobile only) */
