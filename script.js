@@ -30,6 +30,7 @@
       const img = document.getElementById('randImg');
       const idEl = document.getElementById('randId');
       const traitsEl = document.getElementById('randTraits');
+      const shareBtn = document.getElementById('shareBtn');
 
       screen.classList.add('rolling');
       let ticks = 0;
@@ -51,6 +52,23 @@
             <div class="rand-trait"><strong>HAT</strong>${pick.hat}</div>
             <div class="rand-trait"><strong>ACCESSORY</strong>${pick.accessory}</div>
           `;
+          // Build the X share link — points to the per-kiwi page so X shows the image
+          if (shareBtn) {
+            const origin = window.location.origin;
+            const kiwiPageURL = `${origin}/api/kiwi?id=${pick.id}`;
+            const tweet =
+              `I just rolled KIWI #${pad(pick.id)} 🥝\n\n` +
+              `Body: ${pick.body}\n` +
+              `Eye: ${pick.eye}\n` +
+              `Hat: ${pick.hat}\n` +
+              `Accessory: ${pick.accessory}\n\n` +
+              `555 flightless pixel birds. The ones who stayed.`;
+            const shareURL =
+              'https://twitter.com/intent/tweet?text=' +
+              encodeURIComponent(tweet) +
+              '&url=' + encodeURIComponent(kiwiPageURL);
+            shareBtn.href = shareURL;
+          }
         }
       }, 80);
     }
