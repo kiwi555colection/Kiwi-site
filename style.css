@@ -83,11 +83,12 @@
       gap: 10px;
     }
     .nav-logo-gif {
-  width: 32px;
-  height: 32px;
-  border: 3px solid var(--brown-dark);
-  image-rendering: pixelated;
-  object-fit: cover;
+      width: 32px;
+      height: 32px;
+      border: 3px solid var(--brown-dark);
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      object-fit: cover;
     }
 
     /* Hamburger button (mobile only) */
@@ -417,6 +418,15 @@
       margin-bottom: 2px;
     }
     .rand-controls .btn { margin-top: 20px; width: 100%; }
+    .btn-share {
+      background: #000000;
+      color: #ffffff;
+      display: block;
+      text-align: center;
+    }
+    .btn-share:hover {
+      background: #1a1a1a;
+    }
 
     /* ===== ROADMAP ===== */
     .roadmap {
