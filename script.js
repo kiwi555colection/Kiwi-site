@@ -53,7 +53,6 @@
       const shareBtn = document.getElementById('shareBtn');
 
       screen.classList.add('rolling');
-      img.style.opacity = '0.3';
 
       let ticks = 0;
       const maxTicks = 10;
@@ -63,6 +62,7 @@
         ticks++;
         if (ticks >= maxTicks) {
           clearInterval(interval);
+          screen.classList.remove('rolling');
 
           const pick = NFT_DATA[Math.floor(Math.random() * NFT_DATA.length)];
           idEl.textContent = '#' + pad(pick.id);
@@ -73,13 +73,12 @@
             <div class="rand-trait"><strong>ACCESSORY</strong>${pick.accessory}</div>
           `;
 
+          img.style.opacity = '0.3';
           loadImage(pick.id).then(url => {
             img.src = url;
             img.style.opacity = '1';
-            screen.classList.remove('rolling');
           }).catch(() => {
             img.style.opacity = '1';
-            screen.classList.remove('rolling');
           });
 
           if (shareBtn) {
