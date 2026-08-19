@@ -24,54 +24,57 @@
       });
 
     function roll() {
-      if (!manifestReady || NFT_DATA.length === 0) return;
+  if (!manifestReady || NFT_DATA.length === 0) return;
 
-      const screen = document.getElementById('randScreen');
-      const img = document.getElementById('randImg');
-      const idEl = document.getElementById('randId');
-      const traitsEl = document.getElementById('randTraits');
-      const shareBtn = document.getElementById('shareBtn');
+  const screen = document.getElementById('randScreen');
+  const img = document.getElementById('randImg');
+  const idEl = document.getElementById('randId');
+  const traitsEl = document.getElementById('randTraits');
+  const shareBtn = document.getElementById('shareBtn');
 
-      screen.classList.add('rolling');
-      let ticks = 0;
-      const maxTicks = 10;
-      const interval = setInterval(() => {
-        const flash = NFT_DATA[Math.floor(Math.random() * NFT_DATA.length)];
-        img.src = imgURL(flash.id);
-        ticks++;
-        if (ticks >= maxTicks) {
-          clearInterval(interval);
-          screen.classList.remove('rolling');
-          // Image and traits come from the SAME entry — always matched
-          const pick = NFT_DATA[Math.floor(Math.random() * NFT_DATA.length)];
-          img.src = imgURL(pick.id);
-          idEl.textContent = '#' + pad(pick.id);
-          traitsEl.innerHTML = `
-            <div class="rand-trait"><strong>BODY</strong>${pick.body}</div>
-            <div class="rand-trait"><strong>EYE</strong>${pick.eye}</div>
-            <div class="rand-trait"><strong>HAT</strong>${pick.hat}</div>
-            <div class="rand-trait"><strong>ACCESSORY</strong>${pick.accessory}</div>
-          `;
-          // Build the X share link — points to the per-kiwi page so X shows the image
-          if (shareBtn) {
-            const origin = window.location.origin;
-            const kiwiPageURL = `${origin}/api/kiwi?id=${pick.id}`;
-            const tweet =
-              `I just rolled KIWI #${pad(pick.id)} 🥝\n\n` +
-              `Body: ${pick.body}\n` +
-              `Eye: ${pick.eye}\n` +
-              `Hat: ${pick.hat}\n` +
-              `Accessory: ${pick.accessory}\n\n` +
-              `555 flightless pixel birds. The ones who stayed.`;
-            const shareURL =
-              'https://twitter.com/intent/tweet?text=' +
-              encodeURIComponent(tweet) +
-              '&url=' + encodeURIComponent(kiwiPageURL);
-            shareBtn.href = shareURL;
-          }
-        }
-      }, 80);
+  // Animasi pakai CSS (blur + shake), TANPA load gambar
+  screen.classList.add('rolling');
+  let ticks = 0;
+  const maxTicks = 10;
+  const interval = setInterval(() => {
+    // Cuma flash ID text, bukan load gambar
+    const flash = NFT_DATA[Math.floor(Math.random() * NFT_DATA.length)];
+    idEl.textContent = '#' + pad(flash.id);
+    ticks++;
+    if (ticks >= maxTicks) {
+      clearInterval(interval);
+      screen.classList.remove('rolling');
+
+      // Load gambar SEKALI di akhir
+      const pick = NFT_DATA[Math.floor(Math.random() * NFT_DATA.length)];
+      img.src = imgURL(pick.id);
+      idEl.textContent = '#' + pad(pick.id);
+      traitsEl.innerHTML = `
+        <div class="rand-trait"><strong>BODY</strong>${pick.body}</div>
+        <div class="rand-trait"><strong>EYE</strong>${pick.eye}</div>
+        <div class="rand-trait"><strong>HAT</strong>${pick.hat}</div>
+        <div class="rand-trait"><strong>ACCESSORY</strong>${pick.accessory}</div>
+      `;
+      if (shareBtn) {
+        const origin = window.location.origin;
+        const kiwiPageURL = `${origin}/api/kiwi?id=${pick.id}`;
+        const tweet =
+          `I just rolled KIWI #${pad(pick.id)} 🥝\n\n` +
+          `Body: ${pick.body}\n` +
+          `Eye: ${pick.eye}\n` +
+          `Hat: ${pick.hat}\n` +
+          `Accessory: ${pick.accessory}\n\n` +
+          `555 flightless pixel birds. The ones who stayed.`;
+        const shareURL =
+          'https://twitter.com/intent/tweet?text=' +
+          encodeURIComponent(tweet) +
+          '&url=' + encodeURIComponent(kiwiPageURL);
+        shareBtn.href = shareURL;
+      }
     }
+  }, 80);
+}
+    
 
     document.getElementById('rollBtn').addEventListener('click', roll);
 
