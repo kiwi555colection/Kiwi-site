@@ -1,9 +1,7 @@
     // Randomizer — loads REAL NFT data from manifest.json
     // Images are pulled straight from IPFS, traits from ./manifest.json
     const IPFS_CID = 'bafybeibryx5lqp5qw2jeku7yc2szcid37bvzl47deba5o3u7feqhzvk3zy';
-    const IPFS_GATEWAY = 'https://gateway.pinata.cloud/ipfs/';
-    const imgURL = id => `${IPFS_GATEWAY}${IPFS_CID}/${id}.png?t=${Date.now()}`;
-
+    const imgURL = id => `img/nft/${id}.png`;
     let NFT_DATA = [];
     let manifestReady = false;
 
