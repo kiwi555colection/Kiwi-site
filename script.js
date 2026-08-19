@@ -1,28 +1,8 @@
     // Randomizer — loads REAL NFT data from manifest.json
     // Images are pulled straight from IPFS, traits from ./manifest.json
     const IPFS_CID = 'bafybeibryx5lqp5qw2jeku7yc2szcid37bvzl47deba5o3u7feqhzvk3zy';
-
-    const GATEWAYS = [
-      'https://gateway.pinata.cloud/ipfs/',
-      'https://dweb.link/ipfs/',
-      'https://cloudflare-ipfs.com/ipfs/',
-      'https://w3s.link/ipfs/'
-    ];
-
-    function loadImage(id, attempt = 0) {
-      return new Promise((resolve, reject) => {
-        if (attempt >= GATEWAYS.length) return reject('all gateways failed');
-        const url = `${GATEWAYS[attempt]}${IPFS_CID}/${id}.png?t=${Date.now()}`;
-        const testImg = new Image();
-        const timer = setTimeout(() => {
-          testImg.src = '';
-          loadImage(id, attempt + 1).then(resolve).catch(reject);
-        }, 5000);
-        testImg.onload = () => { clearTimeout(timer); resolve(url); };
-        testImg.onerror = () => { clearTimeout(timer); loadImage(id, attempt + 1).then(resolve).catch(reject); };
-        testImg.src = url;
-      });
-    }
+    const IPFS_GATEWAY = 'https://gateway.pinata.cloud/ipfs/';
+    const imgURL = id => `${IPFS_GATEWAY}${IPFS_CID}/${id}.png?t=${Date.now()}`;
 
     let NFT_DATA = [];
     let manifestReady = false;
@@ -52,8 +32,11 @@
       const traitsEl = document.getElementById('randTraits');
       const shareBtn = document.getElementById('shareBtn');
 
-      screen.classList.add('rolling');
+      // Pick final result FIRST
+      const pick = NFT_DATA[Math.floor(Math.random() * NFT_DATA.length)];
 
+      // Text animation only (no image loading during animation)
+      screen.classList.add('rolling');
       let ticks = 0;
       const maxTicks = 10;
       const interval = setInterval(() => {
@@ -64,7 +47,7 @@
           clearInterval(interval);
           screen.classList.remove('rolling');
 
-          const pick = NFT_DATA[Math.floor(Math.random() * NFT_DATA.length)];
+          // Set final result
           idEl.textContent = '#' + pad(pick.id);
           traitsEl.innerHTML = `
             <div class="rand-trait"><strong>BODY</strong>${pick.body}</div>
@@ -72,14 +55,7 @@
             <div class="rand-trait"><strong>HAT</strong>${pick.hat}</div>
             <div class="rand-trait"><strong>ACCESSORY</strong>${pick.accessory}</div>
           `;
-
-          img.style.opacity = '0.3';
-          loadImage(pick.id).then(url => {
-            img.src = url;
-            img.style.opacity = '1';
-          }).catch(() => {
-            img.style.opacity = '1';
-          });
+          img.src = imgURL(pick.id);
 
           if (shareBtn) {
             const origin = window.location.origin;
@@ -110,14 +86,12 @@
       navToggle.classList.toggle('open');
       navLinks.classList.toggle('open');
     });
-    // Close menu when a link is tapped
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         navToggle.classList.remove('open');
         navLinks.classList.remove('open');
       });
     });
-    // Close menu when tapping outside
     document.addEventListener('click', (e) => {
       if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
         navToggle.classList.remove('open');
@@ -131,7 +105,6 @@
     const wlSubmit = document.getElementById('wlSubmit');
 
     function isValidEvm(addr) {
-      // Accept with or without 0x prefix; must be 40 hex chars
       const clean = addr.startsWith('0x') ? addr.slice(2) : addr;
       return /^[0-9a-fA-F]{40}$/.test(clean);
     }
@@ -145,7 +118,6 @@
       e.preventDefault();
       const twitter = document.getElementById('wlTwitter').value.trim();
       const walletRaw = document.getElementById('wlWallet').value.trim();
-      // The 0x prefix is shown separately, so prepend it for validation
       const wallet = walletRaw.startsWith('0x') ? walletRaw : '0x' + walletRaw;
 
       if (!twitter) {
@@ -164,7 +136,6 @@
         return;
       }
 
-      // Submit to Google Sheets via Apps Script
       wlSubmit.disabled = true;
       wlSubmit.textContent = 'SUBMITTING...';
 
@@ -183,7 +154,6 @@
         wlForm.reset();
       })
       .catch(function() {
-        // no-cors never rejects on success; this only fires on network failure
         wlMsg.textContent = '✓ YOU\'RE ON THE LIST. WELCOME TO THE FLOCK.';
         wlMsg.className = 'wl-msg success';
         wlSubmit.textContent = 'APPLIED ✓';
@@ -191,14 +161,12 @@
       });
     });
 
-    // Auto-strip @ if user types it (prefix already shows @)
     document.getElementById('wlTwitter').addEventListener('input', function() {
       if (this.value.startsWith('@')) this.value = this.value.slice(1);
     });
-    // Auto-strip 0x if user types it (prefix already shows 0x)
     document.getElementById('wlWallet').addEventListener('input', function() {
       if (this.value.startsWith('0x') || this.value.startsWith('0X')) {
         this.value = this.value.slice(2);
       }
     });
-          
+                                   
