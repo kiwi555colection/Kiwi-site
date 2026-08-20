@@ -53,7 +53,26 @@
             chose the ground over the sky — grounded on-chain, forever.
           </p>
           <div class="hero-ctas">
-            <a href="/" class="btn btn-primary">Buy on OpenSea →</a>
+            <div class="mint-widget">
+  <button id="connectBtn" class="btn btn-primary">CONNECT WALLET</button>
+  <div id="mintPanel" class="mint-panel" style="display:none;">
+    <div class="mint-info">
+      <div class="mint-supply">
+        <span id="mintedCount">-</span> / <span id="totalSupply">555</span> minted
+      </div>
+      <div class="mint-user">
+        You've minted: <span id="userMinted">0</span>
+      </div>
+    </div>
+    <button id="mintBtn" class="btn btn-primary">MINT (SOON)</button>
+    <div class="mint-address">
+      <span id="connectedAddr">-</span>
+      <button id="disconnectBtn" class="mint-disconnect">disconnect</button>
+    </div>
+    <div id="mintMsg" class="mint-msg"></div>
+  </div>
+            </div>
+            
             <a href="/roll" class="btn btn-secondary">Roll Random</a>
           </div>
         </div>
