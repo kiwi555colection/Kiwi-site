@@ -167,4 +167,12 @@
         this.value = this.value.slice(2);
       }
     });
+
+// Auto-scroll ke waitlist kalau URL /waitlist
+if (window.location.pathname === '/waitlist') {
+  window.addEventListener('DOMContentLoaded', function() {
+    const el = document.getElementById('waitlist');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  });
+}
                                    
