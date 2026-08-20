@@ -745,3 +745,70 @@
       font-family: 'Silkscreen', monospace;
       letter-spacing: 1px;
     }
+/* --- Mint Widget --- */
+.mint-widget {
+  display: inline-block;
+}
+
+.mint-panel {
+  background: #F5E8C8;
+  border: 3px solid #3E2314;
+  padding: 16px;
+  min-width: 280px;
+  box-shadow: 4px 4px 0 #3E2314;
+  margin-top: 8px;
+}
+
+.mint-info {
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #3E2314;
+}
+
+.mint-supply {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.mint-user {
+  opacity: 0.8;
+}
+
+.mint-address {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: monospace;
+  font-size: 12px;
+  color: #3E2314;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.mint-disconnect {
+  background: none;
+  border: 1px solid #3E2314;
+  color: #3E2314;
+  padding: 4px 10px;
+  font-family: inherit;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.mint-disconnect:hover {
+  background: #3E2314;
+  color: #F5E8C8;
+}
+
+.mint-msg {
+  margin-top: 10px;
+  padding: 6px 10px;
+  font-size: 12px;
+  text-align: center;
+  min-height: 14px;
+}
+
+.mint-msg-success { background: #B8CD9E; color: #3E2314; }
+.mint-msg-error { background: #FF6BAA; color: #FFF; }
+.mint-msg-info { background: #E8D8B0; color: #3E2314; }
