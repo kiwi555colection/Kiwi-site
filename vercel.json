@@ -6,8 +6,8 @@
     { "source": "/roll", "destination": "/" },
     { "source": "/lore", "destination": "/" },
     { "source": "/roadmap", "destination": "/" },
-    { "source": "/waitlist", "destination": "/" }
-    { "source": "/about", "destination": "/" },
+    { "source": "/waitlist", "destination": "/" },
+    { "source": "/about", "destination": "/" }
   ],
   "headers": [
     {
