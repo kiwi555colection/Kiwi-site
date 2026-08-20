@@ -178,5 +178,18 @@
       if (el) el.scrollIntoView({ behavior: 'smooth' });
     });
   }
+
+    // Handle klik Home - smooth scroll ke top
+  window.addEventListener('DOMContentLoaded', function() {
+    const homeLink = document.querySelector('.nav-links a[href="/"]');
+    if (homeLink) {
+      homeLink.addEventListener('click', function(e) {
+        if (window.location.pathname === '/') {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+    }
+  });
 })();
                                    
