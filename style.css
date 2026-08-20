@@ -745,8 +745,3 @@
       font-family: 'Silkscreen', monospace;
       letter-spacing: 1px;
     }
-.footer-disabled,
-.btn-disabled {
-  cursor: not-allowed;
-  pointer-events: none;
-}
