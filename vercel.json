@@ -3,8 +3,11 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-  { "source": "/waitlist", "destination": "/" }
-],
+    { "source": "/roll", "destination": "/" },
+    { "source": "/lore", "destination": "/" },
+    { "source": "/roadmap", "destination": "/" },
+    { "source": "/waitlist", "destination": "/" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
