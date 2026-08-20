@@ -812,3 +812,80 @@
 .mint-msg-success { background: #B8CD9E; color: #3E2314; }
 .mint-msg-error { background: #FF6BAA; color: #FFF; }
 .mint-msg-info { background: #E8D8B0; color: #3E2314; }
+
+/* --- About Section --- */
+.about {
+  background: #B8CD9E;
+  padding: 60px 20px;
+  color: #3E2314;
+}
+
+.about-title {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #3E2314;
+  letter-spacing: 2px;
+}
+
+.about-intro {
+  font-size: 18px;
+  margin-bottom: 40px;
+  color: #3E2314;
+  opacity: 0.9;
+}
+
+.about-block {
+  margin-bottom: 32px;
+  padding: 20px;
+  background: #F5E8C8;
+  border: 3px solid #3E2314;
+  box-shadow: 4px 4px 0 #3E2314;
+}
+
+.about-block h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #3E2314;
+  letter-spacing: 1px;
+}
+
+.about-block p {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  color: #3E2314;
+}
+
+.about-block ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.about-block li {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #3E2314;
+  padding-left: 20px;
+  position: relative;
+}
+
+.about-block li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: #FF6BAA;
+}
+
+.about-block a {
+  color: #FF6BAA;
+  text-decoration: underline;
+}
+
+.about-tagline {
+  text-align: center;
+  font-size: 16px;
+  margin-top: 40px;
+  color: #3E2314;
+  font-style: italic;
+}
