@@ -171,7 +171,7 @@
 // Auto-scroll ke section sesuai path (/roll, /lore, /roadmap, /waitlist)
 (function() {
   const path = window.location.pathname.replace('/', '');
-  const validSections = ['roll', 'lore', 'roadmap', 'waitlist'];
+  const validSections = ['roll', 'lore', 'roadmap', 'waitlist', 'about'];
   if (validSections.indexOf(path) !== -1) {
     window.addEventListener('DOMContentLoaded', function() {
       const el = document.getElementById(path);
