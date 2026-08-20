@@ -168,11 +168,15 @@
       }
     });
 
-// Auto-scroll ke waitlist kalau URL /waitlist
-if (window.location.pathname === '/waitlist') {
-  window.addEventListener('DOMContentLoaded', function() {
-    const el = document.getElementById('waitlist');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  });
-}
+// Auto-scroll ke section sesuai path (/roll, /lore, /roadmap, /waitlist)
+(function() {
+  const path = window.location.pathname.replace('/', '');
+  const validSections = ['roll', 'lore', 'roadmap', 'waitlist'];
+  if (validSections.indexOf(path) !== -1) {
+    window.addEventListener('DOMContentLoaded', function() {
+      const el = document.getElementById(path);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+})();
                                    
