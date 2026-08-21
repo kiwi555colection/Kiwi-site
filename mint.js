@@ -9,14 +9,13 @@ const ROBINHOOD_CHAIN = {
   blockExplorerUrls: ['https://robinhoodchain.blockscout.com'],
 };
 
-// PLACEHOLDER — ganti pas contract udah deploy
-const CONTRACT_ADDRESS = '0x0000000000000000000000000000000000000000';
+const CONTRACT_ADDRESS = '0x70f9b5f150bc8fff581a4886246589009eb6881f';
 const CONTRACT_ABI = [
   'function totalSupply() view returns (uint256)',
   'function balanceOf(address owner) view returns (uint256)',
-  'function mint(uint256 quantity) payable',
-  'function price() view returns (uint256)',
 ];
+
+const OPENSEA_MINT_URL = 'https://opensea.io/collection/kiwi-291094080/mint';
 
 let provider = null;
 let signer = null;
@@ -71,7 +70,7 @@ async function checkChain() {
 }
 
 async function updateStats() {
-  if (!contract || CONTRACT_ADDRESS === '0x0000000000000000000000000000000000000000') {
+  if (!contract) {
     mintedCount.textContent = '0';
     userMinted.textContent = '0';
     return;
@@ -88,7 +87,7 @@ async function updateStats() {
 
 async function connectWallet() {
   if (!window.ethereum) {
-    showMsg('Wallet not detected. Install MetaMask or Robinhood Wallet.', 'error');
+    showMsg('Wallet not detected. Install MetaMask or Bitget Wallet.', 'error');
     return;
   }
   try {
@@ -125,26 +124,8 @@ function disconnectWallet() {
 }
 
 async function mint() {
-  if (!contract) {
-    showMsg('Connect wallet first', 'error');
-    return;
-  }
-  if (CONTRACT_ADDRESS === '0x0000000000000000000000000000000000000000') {
-    showMsg('Mint not live yet. Coming soon 🥝', 'info');
-    return;
-  }
-  // PAS CONTRACT UDAH DEPLOY, uncomment blok di bawah:
-  // try {
-  //   const price = await contract.price();
-  //   const tx = await contract.mint(1, { value: price });
-  //   showMsg('Minting... confirm in wallet', 'info');
-  //   await tx.wait();
-  //   showMsg('Minted successfully! 🥝', 'success');
-  //   await updateStats();
-  // } catch (err) {
-  //   console.error(err);
-  //   showMsg('Mint failed: ' + (err.reason || err.message || 'unknown'), 'error');
-  // }
+  // Redirect ke OpenSea SeaDrop mint page
+  window.open(OPENSEA_MINT_URL, '_blank');
 }
 
 connectBtn.addEventListener('click', connectWallet);
@@ -161,4 +142,4 @@ if (window.ethereum) {
     }
   });
   window.ethereum.on('chainChanged', () => window.location.reload());
-}
+      }
